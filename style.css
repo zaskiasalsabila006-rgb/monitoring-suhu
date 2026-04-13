@@ -1,0 +1,75 @@
+:root {
+    --primary: #8b5cf6;
+    --accent: #06b6d4;
+    --dark: #020617;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--dark);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Background Blobs */
+.bg-animate { position: fixed; width: 100%; height: 100%; z-index: -1; filter: blur(100px); }
+.blob { position: absolute; width: 500px; height: 500px; border-radius: 50%; opacity: 0.25; }
+.blob-purple { background: var(--primary); top: -200px; right: -100px; animation: move 20s infinite; }
+.blob-cyan { background: var(--accent); bottom: -200px; left: -100px; animation: move 25s infinite reverse; }
+@keyframes move { from { transform: translate(0,0); } to { transform: translate(150px, 100px); } }
+
+.dashboard { display: flex; height: 100vh; padding: 25px; gap: 25px; }
+
+/* Sidebar */
+.sidebar {
+    width: 280px; background: var(--glass); backdrop-filter: blur(20px);
+    border: 1px solid var(--border); border-radius: 30px;
+    padding: 40px 30px; display: flex; flex-direction: column;
+}
+.logo { font-size: 1.4rem; font-weight: 800; color: var(--accent); margin-bottom: 50px; display: flex; align-items: center; gap: 10px; }
+.menu-item { padding: 15px; border-radius: 15px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; gap: 15px; color: var(--text-sub); transition: 0.3s; }
+.menu-item.active { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3); }
+
+/* System Info */
+.system-source-info { margin-top: auto; font-size: 0.85rem; padding-top: 20px; border-top: 1px solid var(--border); }
+.system-status { display: flex; align-items: center; gap: 8px; color: #10b981; font-weight: 600; margin-bottom: 10px; }
+.system-status i { font-size: 0.5rem; animation: blink 1s infinite; }
+.update-bar { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 10px; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+/* Content Area */
+.content { flex: 1; display: flex; flex-direction: column; gap: 25px; }
+.view-section { display: none; flex-direction: column; gap: 25px; height: 100%; }
+.view-section.active { display: flex; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Header */
+.header { display: flex; justify-content: space-between; align-items: center; }
+.search-bar { background: var(--glass); padding: 12px 25px; border-radius: 20px; border: 1px solid var(--border); width: 350px; display: flex; align-items: center; }
+.search-bar input { background: transparent; border: none; color: white; margin-left: 15px; outline: none; width: 100%; }
+.digital-clock { font-size: 1.2rem; font-weight: 600; color: var(--accent); }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+.card { background: var(--glass); padding: 30px; border-radius: 28px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+.card-glow { box-shadow: 0 0 30px rgba(6, 182, 212, 0.1); }
+.label { color: var(--accent); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+.card h1 { font-size: 3.2rem; margin: 10px 0; font-weight: 800; }
+.icon-bg { position: absolute; right: -15px; bottom: -15px; font-size: 6rem; opacity: 0.05; }
+
+/* Chart */
+.chart-container { flex: 1; background: var(--glass); border-radius: 30px; border: 1px solid var(--border); padding: 30px; display: flex; flex-direction: column; }
+.canvas-holder { flex: 1; width: 100%; position: relative; }
+
+/* City Grid */
+.city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; overflow-y: auto; }
+.city-card { background: var(--glass); padding: 25px; border-radius: 24px; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid var(--border); }
+.city-card:hover { background: var(--primary); transform: translateY(-5px); border-color: var(--primary); }
+.city-card i { font-size: 1.5rem; margin-bottom: 12px; display: block; color: var(--accent); }
+.city-card:hover i { color: white; }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuhuTrack Pro Aceh | Monitoring Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="bg-animate">
+        <div class="blob blob-purple"></div>
+        <div class="blob blob-cyan"></div>
+    </div>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-satellite-dish"></i>
+                <span>SUHUTRACK <strong>PRO</strong></span>
+            </div>
+            <nav class="menu">
+                <div id="btn-beranda" class="menu-item active" onclick="showSection('beranda', this)">
+                    <i class="fas fa-home"></i> Beranda
+                </div>
+                <div id="btn-wilayah" class="menu-item" onclick="showSection('wilayah', this)">
+                    <i class="fas fa-map-location-dot"></i> Wilayah Aceh
+                </div>
+            </nav>
+            <div class="system-source-info">
+                <div class="system-status"><i class="fas fa-circle"></i> Online</div>
+                <p>Informasi Perdetik:</p>
+                <div class="update-bar">
+                    <i class="fas fa-bolt"></i> 
+                    <span>Update: <strong id="last-sync">0s ago</strong></span>
+                </div>
+                <p style="margin-top: 15px;">Sumber Data:</p>
+                <a href="https://www.bmkg.go.id" target="_blank">BMKG Official <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </aside>
+
+        <main class="content">
+            
+            <div id="beranda" class="view-section active">
+                <header class="header">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="cityInput" placeholder="Cari kota di Aceh (Meulaboh, Sigli)...">
+                    </div>
+                    <div id="clock" class="digital-clock">00:00:00</div>
+                </header>
+
+                <section class="stats">
+                    <div class="card card-glow">
+                        <div class="card-body">
+                            <span class="label">Suhu Aceh Saat Ini</span>
+                            <h1 id="tempVal">--°C</h1>
+                            <span id="weatherDesc" class="sub-text">Mencari data...</span>
+                        </div>
+                        <i class="fas fa-temperature-high icon-bg"></i>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="label">Kelembapan</span>
+                            <h1 id="humVal">--%</h1>
+                            <span class="sub-text">Udara Sekitar</span>
+                        </div>
+                        <i class="fas fa-droplet icon-bg"></i>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <span class="label">Lokasi Monitor</span>
+                            <h2 id="locationName">Banda Aceh</h2>
+                            <span class="sub-text">Provinsi Aceh, ID</span>
+                        </div>
+                        <i class="fas fa-location-arrow icon-bg"></i>
+                    </div>
+                </section>
+
+                <section class="chart-container">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Grafik Monitoring Real-Time</h3>
+                    </div>
+                    <div class="canvas-holder">
+                        <canvas id="liveChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <div id="wilayah" class="view-section">
+                <header class="header">
+                    <h2>Daftar Wilayah Monitor Aceh</h2>
+                </header>
+                <div class="city-grid">
+                    <div class="city-card" onclick="selectCity('Banda Aceh')"><i class="fas fa-mosque"></i>Banda Aceh</div>
+                    <div class="city-card" onclick="selectCity('Sigli')"><i class="fas fa-mountain"></i>Sigli</div>
+                    <div class="city-card" onclick="selectCity('Meulaboh')"><i class="fas fa-water"></i>Meulaboh</div>
+                    <div class="city-card" onclick="selectCity('Lhokseumawe')"><i class="fas fa-city"></i>Lhokseumawe</div>
+                    <div class="city-card" onclick="selectCity('Takengon')"><i class="fas fa-cloud"></i>Takengon</div>
+                    <div class="city-card" onclick="selectCity('Sabang')"><i class="fas fa-anchor"></i>Sabang</div>
+                    <div class="city-card" onclick="selectCity('Bireuen')"><i class="fas fa-tree"></i>Bireuen</div>
+                    <div class="city-card" onclick="selectCity('Beureunuen')"><i class="fas fa-store"></i>Beureunuen</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
